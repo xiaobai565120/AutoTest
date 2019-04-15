@@ -1,7 +1,9 @@
 package com.course.httpclient.cookies;
 
 
+import org.apache.http.HttpEntity;
 import org.apache.http.HttpResponse;
+import org.apache.http.client.ClientProtocolException;
 import org.apache.http.client.CookieStore;
 
 
@@ -17,6 +19,7 @@ import org.testng.Assert;
 import org.testng.annotations.Test;
 
 import java.io.IOException;
+
 import java.util.List;
 import java.util.Locale;
 import java.util.ResourceBundle;
@@ -35,17 +38,17 @@ public class MyCookiesForPost {
 
         String baseurl =testurl + testgetcookiesuri;
         HttpGet get = new HttpGet(baseurl);
-        HttpClient client1 =  new DefaultHttpClient();
+        DefaultHttpClient client1 =  new DefaultHttpClient();
         HttpResponse response = client1.execute(get);
         String result = EntityUtils.toString(response.getEntity(),"utf-8");
         System.out.println(result);
-       this.store = ((DefaultHttpClient) client1).getCookieStore();
+        this.store = client1.getCookieStore();
         List<Cookie> cookielist = store.getCookies();
         for (Cookie cookie:cookielist
              ) {
             String name = cookie.getName();
             String value =cookie.getValue();
-            System.out.println(cookie);
+            //System.out.println(cookie);
             System.out.println("name="+name+";value="+value);
 
         }
@@ -53,7 +56,7 @@ public class MyCookiesForPost {
         }
 
     @Test(dependsOnMethods = {"test1"})
-    public void test2() throws IOException {
+    public void test2() throws IOException{
         //拼接最终的测试地址
         String baseurl = this.testurl + this.testpostwithcookiesuri;
 
@@ -67,37 +70,43 @@ public class MyCookiesForPost {
         JSONObject param = new JSONObject();
         param.put("name", "huhasan");
         param.put("age", "30");
+        System.out.println(param);
 
-        //设置请求头信息
-        post.setHeader("Content-Type", "application/json");
+
+        //设置请求头信息 设置header
+        post.setHeader("Content-Type","application/json");
 
         //将参数信息添加到方法中
-        StringEntity entity = new StringEntity(param.toString(), "utf-8");
+        StringEntity entity = new StringEntity(param.toString(),"utf-8");
         post.setEntity(entity);
 
-        //声明一个对象来进行相应结果的存储
+        //声明一个对象来进行响应结果的存储
         String result;
 
         //设置cookies信息
-       client.setCookieStore(this.store);
-        System.out.println(store);
+        client.setCookieStore(this.store);
+        System.out.println(this.store);
 
         //执行post方法
         HttpResponse response = client.execute(post);
+        System.out.println(response);
 
         //获取响应结果
-        result = EntityUtils.toString(response.getEntity(), "utf-8");
+        result = EntityUtils.toString(response.getEntity(),"utf-8");
         System.out.println(result);
-            //处理结果，就是判断返回结果是否符合预期
-            //将返回的结果字符串转化成json对象
-            JSONObject resultJson = new JSONObject(result);
 
-            //获取结果值
-            String success = (String) resultJson.get("huhansan");
-            String status = (String) resultJson.get("status");
-            //具体判断返回结果的值
-            Assert.assertEquals("success",success);
-            Assert.assertEquals("1",status);
+        //处理结果，就是判断返回结果是否符合预期
+        //将返回的响应结果字符串转化成为json对象
+        JSONObject resultJson = new JSONObject(result);
+
+
+        //获取到结果值
+        String success = (String) resultJson.get("huhansan");
+        String status = (String) resultJson.get("status");
+
+        //具体的判断返回结果的值
+        Assert.assertEquals("success",success);
+        Assert.assertEquals("1",status);
         }
     }
 

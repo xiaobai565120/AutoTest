@@ -43,7 +43,7 @@
     "method": "post"
     },
     "response": {
-      "text":"厉害了！！！！"
+      "text":"厉害了！！！"
     }
   },
   {
@@ -78,8 +78,8 @@
     "request": {
       "uri": "/post/with/cookies",
       "method": "post",
-      "headers": {
-        "Content-Type": "application/json"
+      "headers":{
+        "content-type":"application/json"
       },
       "cookies": {
         "login": "true"
@@ -90,11 +90,32 @@
       }
     },
     "response": {
+      "status": 200,
       "json": {
         "huhansan": "success",
         "status": "1"
       }
     }
+  },
+  {
+    "description": "这是必须携带header信息的post请求",
+    "request": {
+      "uri": "/post/with/header",
+      "method": "post",
+      "headers": {
+        "content-type": "application/json"
+      },
+      "json": {
+        "name": "xiaobai",
+        "age": "18"
+      }
+
+    },
+    "response": {
+      "text": "获得header信息成功"
+
+    }
+
   }
 
 ]
