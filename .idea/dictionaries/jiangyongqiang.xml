@@ -6,6 +6,7 @@
       <w>cookielist</w>
       <w>getcookieuri</w>
       <w>postdemo</w>
+      <w>springframework</w>
       <w>testgetcookiesuri</w>
       <w>testgetcookieuri</w>
       <w>testgetwithcookiesuri</w>
@@ -13,6 +14,7 @@
       <w>testpostwithcookiesuri</w>
       <w>testpostwithheaderuri</w>
       <w>testurl</w>
+      <w>zhangsan</w>
     </words>
   </dictionary>
 </component>

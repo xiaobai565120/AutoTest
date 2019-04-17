@@ -15,7 +15,7 @@ import java.util.Objects;
 @Api(value = "/",description = "这是我全部的get方法")
 public class MyGetMethod {
     @RequestMapping(value = "/getCookies",method = RequestMethod.GET)
-    @ApiOperation(value = "通过这个方法可以获取到cookies",httpMethod = "get")
+    @ApiOperation(value = "通过这个方法可以获取到cookies",httpMethod = "GET")
     public String getCookies(HttpServletResponse response){
         //HttpServerletRequest 装请求参数的类
         //HttpServerletResponse 装响应信息的类
@@ -68,7 +68,7 @@ public class MyGetMethod {
      * URL:ip：port/get/with/param/10/20
      */
     @RequestMapping(value = "/get/with/param/{start}/{end}",method = RequestMethod.GET)
-    @ApiOperation(value = "第二种携带参数访问的get请求",httpMethod = "get")
+    @ApiOperation(value = "第二种携带参数访问的get请求",httpMethod = "GET")
     public Map myGetList(@PathVariable Integer start,
                          @PathVariable Integer end){
         Map<String,Integer> myList = new HashMap<>();
