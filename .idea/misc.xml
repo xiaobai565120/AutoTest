@@ -4,6 +4,7 @@
     <list size="1">
       <item index="0" class="java.lang.String" itemvalue="org.springframework.web.bind.annotation.RequestMapping" />
     </list>
+    <pattern value="com.course.model.User" method="toSting" />
   </component>
   <component name="MavenProjectsManager">
     <option name="originalFiles">

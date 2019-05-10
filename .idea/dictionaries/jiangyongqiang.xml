@@ -5,6 +5,8 @@
       <w>baseurl</w>
       <w>cookielist</w>
       <w>getcookieuri</w>
+      <w>jdbc</w>
+      <w>logincase</w>
       <w>postdemo</w>
       <w>springframework</w>
       <w>testgetcookiesuri</w>
